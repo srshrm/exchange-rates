@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Exchange Rates</title>
+<style>
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+
+</head>
+<body>
+	<h4 th:text="'Historical exchange rates for the past '+ ${exRates.size()} +' months for the same day. Note: Empty table row indicates absence of data for that day.'"></h4>
+	<table>
+		<tr>
+			<th>Month</th>
+			<th>GBP</th>
+			<th>USD</th>
+			<th>HKD</th>
+		</tr>
+
+		<tr th:each="er : ${exRates}">
+			<td th:text="${er.date}">date</td>
+			<td th:text="${er.rates.GBP}">GBP</td>
+			<td th:text="${er.rates.USD}">USD</td>
+			<td th:text="${er.rates.HKD}">HKD</td>
+		</tr>
+	</table>
+</body>
+</html>
